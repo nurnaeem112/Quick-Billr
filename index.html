@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Tags are dynamically updated by App.tsx -->
+    <title>QuickBillr - Free Invoice & Estimate Generator</title>
+    <meta name="description" content="Generate professional invoices and estimates in seconds with QuickBillr. Supports 20+ languages, multiple currencies, QR code payments, and customizable templates." />
+    <meta name="keywords" content="invoice maker, estimate generator, free invoice template, freelancer billing tool, multi-language invoice, multi-currency invoice, bill creator" />
+    <link rel="canonical" href="https://quickbillr.app/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quickbillr.app/" />
+    <meta property="og:title" content="QuickBillr - Free Invoice & Estimate Generator" />
+    <meta property="og:description" content="Create, preview, and download professional invoices and estimates in seconds with customizable templates, multi-language & currency support, and QR code payments." />
+    <meta property="og:image" content="https://quickbillr.app/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://quickbillr.app/" />
+    <meta property="twitter:title" content="QuickBillr - Free Invoice & Estimate Generator" />
+    <meta property="twitter:description" content="Create, preview, and download professional invoices and estimates in seconds with customizable templates, multi-language & currency support, and QR code payments." />
+    <meta property="twitter:image" content="https://quickbillr.app/og-image.png" />
+
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "QuickBillr",
+      "url": "https://quickbillr.app/",
+      "logo": "https://quickbillr.app/vite.svg",
+      "description": "A free invoice and estimate generator for freelancers and small businesses."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "QuickBillr Invoice Generator",
+      "operatingSystem": "Web",
+      "applicationCategory": "BusinessApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "150"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                '50': '#eff6ff',
+                '100': '#dbeafe',
+                '200': '#bfdbfe',
+                '300': '#93c5fd',
+                '400': '#60a5fa',
+                '500': '#3b82f6',
+                '600': '#2563eb',
+                '700': '#1d4ed8',
+                '800': '#1e40af',
+                '900': '#1e3a8a',
+                '950': '#172554',
+              },
+            },
+            fontFamily: {
+              'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+            },
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+  .export-mode {
+    font-size: 13px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #111827; /* Equivalent to dark theme's text-gray-900 */
+  }
+  .export-mode h1 {
+    font-size: 2rem;
+  }
+  .dark .export-mode .dark\\:text-gray-100 { color: #111827 !important; }
+  .dark .export-mode .dark\\:text-white { color: #111827 !important; }
+  .dark .export-mode .dark\\:text-gray-200 { color: #374151 !important; }
+  .dark .export-mode .dark\\:text-gray-300 { color: #4b5563 !important; }
+  .dark .export-mode .dark\\:text-gray-400 { color: #6b7280 !important; }
+  .dark .export-mode .dark\\:border-gray-200 { border-color: #111827 !important; }
+  .dark .export-mode .dark\\:border-gray-500 { border-color: #374151 !important; }
+  .dark .export-mode .dark\\:border-gray-600 { border-color: #d1d5db !important; }
+  .dark .export-mode .dark\\:border-gray-700 { border-color: #e5e7eb !important; }
+
+  #invoice-preview {
+    width: 840px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  /* Responsive Scaling for Invoice Preview */
+  /* Ensures the preview scales down on smaller screens while maintaining layout. */
+  /* Negative margins are used to compensate for the space reserved by the original element size. */
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    #invoice-preview {
+      transform: scale(0.85);
+      transform-origin: top center;
+      margin-left: -63px;
+      margin-right: -63px;
+      margin-bottom: -143px;
+    }
+  }
+
+  /* Large Mobile / Small Tablet Portrait */
+  @media (max-width: 767px) {
+    #invoice-preview {
+      transform: scale(0.7);
+      margin-left: -126px;
+      margin-right: -126px;
+      margin-bottom: -285px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 639px) {
+    #invoice-preview {
+      transform: scale(0.5);
+      margin-left: -210px;
+      margin-right: -210px;
+      margin-bottom: -475px;
+    }
+  }
+
+  /* Small Mobile */
+  @media (max-width: 479px) {
+    #invoice-preview {
+      transform: scale(0.4);
+      margin-left: -252px;
+      margin-right: -252px;
+      margin-bottom: -570px;
+    }
+  }
+
+  #print-container {
+    display: none;
+  }
+
+  @media print {
+    body > *:not(#print-container) {
+      display: none !important;
+    }
+    #print-container, #print-container * {
+      visibility: visible !important;
+    }
+    #print-container {
+      display: block !important;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+    @page {
+      size: auto;
+      margin: 1cm;
+    }
+    .totals-summary {
+        page-break-inside: avoid;
+    }
+    .line-items-table {
+        page-break-inside: auto;
+    }
+     .line-items-table tr {
+        page-break-inside: avoid;
+    }
+  }
+</style>
+
+<style>
+  /* --- Template Styles --- */
+  /* --- Classic Template --- */
+  .template-classic h1 {
+    font-family: 'Georgia', serif;
+    color: #111827;
+  }
+  .dark .template-classic h1 {
+    color: #f9fafb;
+  }
+  .template-classic thead {
+    background-color: #f3f4f6;
+    color: #1f2937;
+    border-bottom: 2px solid #1f2937;
+  }
+  .dark .template-classic thead {
+    background-color: #374151;
+    color: #f9fafb;
+    border-bottom: 2px solid #d1d5db;
+  }
+  .template-classic .font-bold {
+    font-weight: 600;
+  }
+
+  /* --- Modern Template --- */
+  .template-modern h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    position: relative;
+    display: inline-block;
+    padding: 0 0.2em; /* Makes background bar wider than text */
+    margin: 0 -0.2em; /* Compensates padding to maintain original alignment */
+    z-index: 1; /* Ensures text is above the background bar */
+  }
+  .template-modern h1::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: 0;
+    right: 0;
+    z-index: -1; /* Places the bar behind the text */
+    background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  }
+  .template-modern thead {
+    background: linear-gradient(to right, #3b82f6, #1d4ed8);
+    color: white;
+  }
+  .template-modern thead th:first-child { border-radius: 6px 0 0 0; }
+  .template-modern thead th:last-child { border-radius: 0 6px 0 0; }
+  .template-modern .line-items-table {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .dark .template-modern .line-items-table {
+    border-color: #4b5563;
+  }
+  .template-modern .line-items-table tbody tr:last-child {
+    border-bottom: none;
+  }
+  .template-modern .balance-due-row {
+    background-color: #eff6ff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    border: none !important;
+  }
+  .dark .template-modern .balance-due-row {
+    background-color: #1e3a8a;
+  }
+</style>
+
+<style>
+  /* --- Fine-tuned PDF Export Alignment Fix --- */
+  .export-mode table {
+    border-collapse: collapse !important;
+  }
+
+  .export-mode th,
+  .export-mode td {
+    vertical-align: middle !important;
+    line-height: 2.2 !important;
+    padding-top: 0.2px !important;
+    
+  }
+
+  /* Adjust this translateY value to fine-tune alignment */
+  .export-mode th span,
+  .export-mode td span,
+  .export-mode th div,
+  .export-mode td div {
+    display: inline-block;
+    vertical-align: middle !important;
+    transform: translateY(-2px); /* Try -1px, -2px, -3px depending on result */
+  }
+</style>
+
+
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.22.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.3",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-BiGl3pfr.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+    <div id="print-container"></div>
+</body>
+</html>
