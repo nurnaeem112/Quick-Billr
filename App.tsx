@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import InvoiceBuilderPage from './pages/InvoiceBuilderPage';
 import AboutPage from './pages/AboutPage';
@@ -96,7 +96,7 @@ const SEOUpdater: React.FC = () => {
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <HashRouter>
+      <BrowserRouter>
         <SEOUpdater />
         <div className="flex flex-col min-h-screen bg-gray-50 text-gray-800 font-sans dark:bg-gray-900 dark:text-gray-200">
           <Header />
@@ -110,7 +110,7 @@ const App: React.FC = () => {
           </main>
           <Footer />
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };
