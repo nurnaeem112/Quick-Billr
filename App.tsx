@@ -93,6 +93,7 @@ const SEOUpdater: React.FC = () => {
   return null; // This component does not render anything
 }
 
+
 const App: React.FC = () => {
   return (
     <ThemeProvider>
