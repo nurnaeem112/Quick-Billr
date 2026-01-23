@@ -68,4 +68,45 @@
     <changefreq>monthly</changefreq>
   </url>
 
+
+<!-- 📰 Blog Main Page -->
+<url>
+  <loc>https://quickbillr.online/blog</loc>
+  <lastmod>2026-01-22</lastmod>
+</url>
+
+<!-- 📝 Blog Posts -->
+<url>
+  <loc>https://quickbillr.online/blog/get-paid-faster</loc>
+  <lastmod>2026-01-22</lastmod>
+</url>
+
+<url>
+  <loc>https://quickbillr.online/blog/invoicing-mistakes</loc>
+  <lastmod>2026-01-20</lastmod>
+</url>
+
+<url>
+  <loc>https://quickbillr.online/blog/branding-your-business</loc>
+  <lastmod>2026-01-18</lastmod>
+</url>
+
+<url>
+  <loc>https://quickbillr.online/blog/tax-season-prep</loc>
+  <lastmod>2026-01-18</lastmod>
+</url>
+
+<url>
+  <loc>https://quickbillr.online/blog/remote-work-billing</loc>
+  <lastmod>2026-01-18</lastmod>
+</url>
+
+<url>
+  <loc>https://quickbillr.online/blog/the-future-of-billing</loc>
+  <lastmod>2026-01-18</lastmod>
+</url>
+
+
+
+
 </urlset>
