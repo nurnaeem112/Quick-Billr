@@ -8,6 +8,7 @@ import Template4 from '../templates/Template4';
 import Template5 from '../templates/Template5';
 import Template6 from '../templates/Template6';
 import Template7 from '../templates/Template7';
+import Template8 from '../templates/Template8';
 
 interface InvoicePreviewProps {
   data: InvoiceData;
@@ -76,8 +77,11 @@ const InvoicePreview: React.FC<InvoicePreviewProps> = (props) => {
       case 'template-6':
         return <Template6 {...props} />;
 
-        case 'template-7':
+      case 'template-7':
         return <Template7 {...props} />;
+        
+      case 'template-8':
+        return <Template8 {...props} />;
 
 
 

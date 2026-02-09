@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from './BlogPage';
+import { Helmet } from 'react-helmet-async';
+
+
+
 
 const FeatureCard: React.FC<{ icon: React.ReactElement; title: string; description: string }> = ({ icon, title, description }) => (
   <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow dark:bg-gray-800">
@@ -69,6 +73,46 @@ const HomePage: React.FC = () => {
     const featuredPosts = blogPosts.slice(0, 3);
 
   return (
+
+
+
+   <>
+      {/* ✅ HELMET MUST BE HERE */}
+      <Helmet>
+        <title>Free Invoice Generator for Freelancers & Small Businesses | QuickBillr</title>
+        
+        <meta
+          name="description"
+          content="Create professional invoices in seconds with QuickBillr — a free invoice generator built for freelancers and small businesses. Customize templates, support multiple currencies, add QR code payments, and get paid faster."
+          key="description"
+        />
+
+        <meta
+        name="keywords"
+        content="free invoice generator, invoice maker, create invoice online, freelancer invoice, small business invoicing, professional invoice template, billing software, estimate generator"
+        />
+
+
+        {/* Canonical (VERY IMPORTANT) */}
+        <link rel="canonical" href="https://quickbillr.online/" />
+
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+        <meta property="og:description" content="Create professional invoices in seconds with QuickBillr." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://quickbillr.com/" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+        <meta name="twitter:description" content="Create invoices easily with QuickBillr." />
+      </Helmet>
+
+
+
+
     <div>
       {/* Hero Section */}
       <section className="bg-white dark:bg-gray-900">
@@ -169,6 +213,7 @@ const HomePage: React.FC = () => {
       </section>
 
     </div>
+    </>
   );
 };
 

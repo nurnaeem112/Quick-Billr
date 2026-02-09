@@ -1,7 +1,44 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const AboutPage: React.FC = () => {
   return (
+
+   <>
+      {/* ✅ HELMET MUST BE HERE */}
+      <Helmet>
+        <title>About QuickBillr – Our Mission to Simplify Invoicing for Freelancers</title>
+        
+        <meta
+          name="description"
+          content="Learn about QuickBillr and our mission to simplify invoicing for freelancers and small businesses worldwide with fast, modern, and completely free billing tools."
+          key="description"
+        />
+        
+        <meta
+        name="keywords"
+        content="about quickbillr, invoicing software company, freelancer tools platform, billing solutions, invoice startup"
+        />
+
+
+        {/* Canonical (VERY IMPORTANT) */}
+        <link rel="canonical" href="https://quickbillr.online/about-quickbillr" />
+
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+        <meta property="og:description" content="Create professional invoices in seconds with QuickBillr." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://quickbillr.com/" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+        <meta name="twitter:description" content="Create invoices easily with QuickBillr." />
+      </Helmet>
+
+
     <div className="bg-white py-16 sm:py-24 dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
@@ -38,6 +75,7 @@ const AboutPage: React.FC = () => {
         </div>
       </div>
     </div>
+   </>
   );
 };
 

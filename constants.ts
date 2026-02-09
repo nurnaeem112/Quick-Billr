@@ -7,6 +7,7 @@ import template4Img from './assets/template-4.png';
 import template5Img from './assets/template-5.png';
 import template6Img from './assets/template-6.png';
 import template7Img from './assets/template-7.png';
+import template8Img from './assets/template-8.png';
 
 export const TEMPLATES: Template[] = [
   { id: 'template-1', image: template1Img, name: 'template-1', type: 'Premium' },
@@ -16,6 +17,7 @@ export const TEMPLATES: Template[] = [
   { id: 'template-5', image: template5Img, name: 'template-5', type: 'Free' },
   { id: 'template-6', image: template6Img, name: 'template-6', type: 'Free' },
   { id: 'template-7', image: template7Img, name: 'template-7', type: 'Free' },
+  { id: 'template-8', image: template8Img, name: 'template-8', type: 'Free' },
 
 ]
 

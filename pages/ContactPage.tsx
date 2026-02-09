@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const ContactPage: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted'>('idle');
@@ -13,6 +14,43 @@ const ContactPage: React.FC = () => {
   };
 
   return (
+
+
+   <>
+      {/* ✅ HELMET MUST BE HERE */}
+      <Helmet>
+        <title>Contact QuickBillr Support | Get Help With Invoicing & Billing</title>
+        
+        <meta
+          name="description"
+          content="Need help with QuickBillr? Contact our support team for assistance with invoices, billing, or technical questions. We're here to help freelancers and businesses succeed."
+          key="description"
+        />
+
+        <meta
+        name="keywords"
+        content="contact quickbillr, invoice support, billing help, customer support invoicing software"
+        />
+
+
+        {/* Canonical (VERY IMPORTANT) */}
+        <link rel="canonical" href="https://quickbillr.online/contact-support" />
+
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+        <meta property="og:description" content="Create professional invoices in seconds with QuickBillr." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://quickbillr.com/" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+        <meta name="twitter:description" content="Create invoices easily with QuickBillr." />
+      </Helmet>
+
+    
     <div className="bg-white py-16 sm:py-24 dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative bg-white shadow-xl rounded-2xl dark:bg-gray-800">
@@ -67,6 +105,7 @@ const ContactPage: React.FC = () => {
         </div>
       </div>
     </div>
+   </>
   );
 };
 

@@ -8,6 +8,7 @@ import useLocalStorage from '../hooks/useLocalStorage';
 import { translations } from '../translations';
 import InvoicePreview from '../components/InvoicePreview';
 import { downloadPdf } from "../services/downloadPdf";
+import { Helmet } from 'react-helmet-async';
 
 
 declare const jspdf: any;
@@ -106,6 +107,44 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options, value, onChang
   };
 
   return (
+
+   <>
+      {/* ✅ HELMET MUST BE HERE */}
+      <Helmet>
+        <title>Free Online Invoice Generator – Create & Download Professional Invoices | QuickBillr</title>
+        
+        <meta
+          name="description"
+          content="Generate, customize, and download professional invoices instantly with QuickBillr’s free online invoice generator. No signup required. Perfect for freelancers, contractors, and small businesses."
+          key="description"
+        />
+        
+        <meta
+        name="keywords"
+        content="online invoice generator, create invoice free, download invoice pdf, invoice template free, freelancer billing software, invoice creator, estimate maker"
+        />
+
+        {/* Canonical (VERY IMPORTANT) */}
+        <link rel="canonical" href="https://quickbillr.online/free-invoice-generator" />
+        
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+        <meta property="og:description" content="Create professional invoices in seconds with QuickBillr." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://quickbillr.com/" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+        <meta name="twitter:description" content="Create invoices easily with QuickBillr." />
+      </Helmet>
+
+
+
+
+    
     <div className="relative" ref={dropdownRef}>
       <button
         type="button"
@@ -153,6 +192,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options, value, onChang
         </ul>
       )}
     </div>
+   </>
   );
 };
 

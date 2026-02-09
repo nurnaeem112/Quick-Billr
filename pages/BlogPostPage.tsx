@@ -3,7 +3,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { blogPosts } from './BlogPage';
 import { useSeo } from "../hooks/useSeo";
 import SafeHTMLRenderer from "../components/SafeHTMLRenderer";
-
+import { Helmet } from 'react-helmet-async';
 
 const BlogPostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,6 +22,42 @@ const BlogPostPage: React.FC = () => {
   }
 
   return (
+
+     <>
+        {/* ✅ HELMET MUST BE HERE */}
+        <Helmet>
+          <title>Invoicing Tips, Freelancer Guides & Small Business Advice | QuickBillr Blog</title>
+          
+          <meta
+            name="description"
+            content="Explore expert invoicing tips, freelancer guides, and small business advice on the QuickBillr Blog. Learn how to get paid faster, manage clients, and grow your business smarter."
+            key="description"
+          />
+
+          <meta
+            name="keywords"
+            content="invoicing tips, freelancer advice, small business finance, how to get paid faster, billing tips, invoice guide, freelance business tips"
+          />
+
+
+          {/* Canonical (VERY IMPORTANT) */}
+          <link rel="canonical" href="https://quickbillr.online/blog" />
+
+          <meta name="robots" content="index, follow" />
+  
+          {/* Open Graph */}
+          <meta property="og:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+          <meta property="og:description" content="Create professional invoices in seconds with QuickBillr." />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://quickbillr.com/" />
+  
+          {/* Twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Free Invoice Generator for Freelancers | QuickBillr" />
+          <meta name="twitter:description" content="Create invoices easily with QuickBillr." />
+        </Helmet>
+
+
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="relative h-[400px] w-full">
         <img 
@@ -90,6 +126,7 @@ const BlogPostPage: React.FC = () => {
         </div>
       </div>
     </div>
+   </>
   );
 };
 
