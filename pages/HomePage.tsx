@@ -167,7 +167,7 @@ const HomePage: React.FC = () => {
     <div>
       {/* Hero Section */}
       <section className="bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-44 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight dark:text-white">
             Create Professional Invoices & Estimates in <span className="bg-gradient-to-r from-primary-500 to-primary-700 text-transparent bg-clip-text">Seconds</span>
           </h1>
