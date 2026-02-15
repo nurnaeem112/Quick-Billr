@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { blogPosts } from './BlogPage';
 import { Helmet } from 'react-helmet-async';
 
-
+import { TEMPLATES } from '../constants';
 
 
 const FeatureCard: React.FC<{ icon: React.ReactElement; title: string; description: string }> = ({ icon, title, description }) => (
@@ -24,6 +24,57 @@ const TestimonialCard: React.FC<{ quote: string; author: string; role: string; a
         <p className="text-sm text-gray-500 dark:text-gray-400">{role}</p>
     </div>
 );
+
+
+const TemplateMarquee: React.FC = () => {
+  // Use the actual templates defined in constants for consistency
+  // If TEMPLATES is small, we cycle it to fill the marquee
+  const displayTemplates = [...TEMPLATES, ...TEMPLATES, ...TEMPLATES];
+
+  return (
+    <div className="relative w-full overflow-hidden py-10">
+      {/* Edge Fades */}
+      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
+
+      {/* Marquee Track - Pauses on hover */}
+      <div className="flex w-fit animate-marquee hover:[animation-play-state:paused]">
+        {displayTemplates.map((template, idx) => (
+          <div key={`${template.id}-${idx}`} className="flex-shrink-0 px-4">
+            <Link
+              to={`/free-invoice-generator?template=${template.id}`}
+              className="group block relative w-48 md:w-64 aspect-[1/1.414] bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-105"
+            >
+              <img
+                src={template.image}
+                alt={template.name}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              {/* Overlay on hover */}
+              <div className="absolute inset-0 bg-primary-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[1px]">
+                <span className="bg-white text-primary-700 font-bold py-2 px-4 rounded-lg shadow-lg text-sm">
+                  Use {template.name}
+                </span>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.333%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+      `}</style>
+    </div>
+  );
+};
+
 
 const HomePage: React.FC = () => {
     const features = [
@@ -116,7 +167,7 @@ const HomePage: React.FC = () => {
     <div>
       {/* Hero Section */}
       <section className="bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-44 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight dark:text-white">
             Create Professional Invoices & Estimates in <span className="bg-gradient-to-r from-primary-500 to-primary-700 text-transparent bg-clip-text">Seconds</span>
           </h1>
@@ -130,8 +181,12 @@ const HomePage: React.FC = () => {
             >
               Try Free Now
             </Link>
+            
           </div>
         </div>
+        {/* Marquee Showcase */}
+        <TemplateMarquee />
+      
       </section>
 
       {/* Features Section */}

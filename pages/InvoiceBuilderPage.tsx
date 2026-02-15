@@ -10,6 +10,7 @@ import InvoicePreview from '../components/InvoicePreview';
 import { downloadPdf } from "../services/downloadPdf";
 import { Helmet } from 'react-helmet-async';
 
+import { useLocation } from 'react-router-dom';
 
 declare const jspdf: any;
 declare const html2canvas: any;
@@ -205,7 +206,18 @@ const InvoiceBuilderPage: React.FC = () => {
   const [paperSize, setPaperSize] = useLocalStorage<string>('paperSize', 'a4');
   const [isDownloading, setIsDownloading] = useState(false);
 
-  
+    const location = useLocation();
+
+  // Detect template from URL query parameters
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const templateId = params.get('template');
+    if (templateId && TEMPLATES.some(t => t.id === templateId)) {
+      setSelectedTemplate(templateId);
+    }
+  }, [location, setSelectedTemplate]);
+
+
   const t = translations[data.language as keyof typeof translations] || translations['en-US'];
 
   const handleDataChange = useCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
